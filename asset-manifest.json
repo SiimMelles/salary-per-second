@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/salary-per-second/static/js/main.51febc76.js",
+    "main.js": "/salary-per-second/static/js/main.d1404220.js",
     "index.html": "/salary-per-second/index.html",
-    "main.51febc76.js.map": "/salary-per-second/static/js/main.51febc76.js.map"
+    "main.d1404220.js.map": "/salary-per-second/static/js/main.d1404220.js.map"
   },
   "entrypoints": [
-    "static/js/main.51febc76.js"
+    "static/js/main.d1404220.js"
   ]
 }
