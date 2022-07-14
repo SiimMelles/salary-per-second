@@ -1,24 +1,32 @@
-import { Grid, InputAdornment, Table, TableBody, TableRow } from "@mui/material";
+import { Grid, InputAdornment, Switch, Table, TableBody, TableRow } from "@mui/material";
 import { useState } from "react";
-import { StyledButton, StyledFrontPageText, StyledHeader, StyledParagraph, StyledSalaryHeader, StyledSalaryParagraph, StyledSalaryText, StyledTableCell, StyledTextField } from "./StyledComponents";
-
+import { StyledButton, StyledFrontPageText, StyledHeader, StyledParagraph, StyledSalaryHeader, 
+    StyledSalaryParagraph, StyledSalaryText, StyledTableCell, StyledTextField } from "./StyledComponents";
 
 export default function Home() {
 
     const [showForm, setShowForm] = useState(true as boolean);
+
+    const [monthlySalary, setMonthlySalary] = useState(true as boolean);
     
     const [salary, setSalary] = useState("" as string);
 
     const submitSalary = () => {
         if (salary !== "") {
             console.log(salary)
-            parseInt(salary);
+            let sal = parseInt(salary);
+            setSalary(monthlySalary ? (sal * 12).toString() : sal.toString());
             setShowForm(false);
         }
     }
 
     const renderSalaryNumber = (x: number) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    const clearAll = () => {
+        setSalary("");
+        setShowForm(true);
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -43,7 +51,6 @@ export default function Home() {
                     <StyledFrontPageText>
                         Start by typing your salary in the box and hitting go:
                     </StyledFrontPageText>
-    
                     <StyledTextField
                         InputProps={{
                             onChange: (e) => handleChange(e),
@@ -51,6 +58,25 @@ export default function Home() {
                             endAdornment: <InputAdornment position="end"><p style={{color: "#FFF"}}>€</p></InputAdornment>
                         }}
                      placeholder="Your salary here"/>
+                    <Grid textAlign="center" alignItems="center" justifyContent="center" container>
+                        <Grid item>
+                            <StyledParagraph style={{opacity: monthlySalary ? "0.5" : "1"}}>
+                                per Year
+                            </StyledParagraph>
+                        </Grid>
+                        <Grid item>
+                            <Switch
+                                checked={monthlySalary}
+                                onChange={() => setMonthlySalary(!monthlySalary)}
+                                value="salaryType"
+                            />
+                        </Grid>
+                        <Grid item>
+                            <StyledParagraph style={{opacity: monthlySalary ? "1" : "0.5"}}>
+                                per Month
+                            </StyledParagraph>
+                        </Grid>
+                    </Grid>
                      <StyledButton onClick={() => submitSalary()}>Go</StyledButton>
                 </Grid>
             </Grid>
@@ -126,9 +152,21 @@ export default function Home() {
                                     </StyledParagraph>
                                 </StyledTableCell>
                             </TableRow>
+                            <TableRow>
+                                <StyledTableCell align="right">
+                                    <StyledSalaryParagraph>
+                                        {Math.trunc(parseInt(salary) * 100 / 12) / 100}€
+                                    </StyledSalaryParagraph>
+                                </StyledTableCell>
+                                <StyledTableCell>
+                                    <StyledParagraph>
+                                        per month
+                                    </StyledParagraph>
+                                </StyledTableCell>
+                            </TableRow>
                         </TableBody>
                     </Table>
-
+                    <StyledButton onClick={() => clearAll()}>Go back</StyledButton>
                 </Grid>
             </Grid>
         );

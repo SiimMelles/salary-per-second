@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@mui/material';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import React from 'react';
 import Home from './components/Home';
 import { StyledContainer } from './components/StyledComponents';
@@ -12,12 +12,18 @@ const theme = createTheme({
       fontWeightMedium: 600,
       fontWeightBold: 700,
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundImage: `linear-gradient(180deg, #0B132B 0%, #3A506B 100%)`,
+        },
+      },
+    },
+  },
   palette: {
     text: {
       primary: "#FFF"
-    },
-    background: {
-      default: "#111111"
     },
     primary: {
       main: "#6FFFE9",
@@ -36,7 +42,8 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <StyledContainer maxWidth="sm">
+      <CssBaseline />
+      <StyledContainer>
         <Home />
       </StyledContainer>
     </ThemeProvider>

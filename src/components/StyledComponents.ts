@@ -4,14 +4,14 @@ export const StyledHeader = styled(Typography)(() => ({
     color: "#6FFFE9",
     fontWeight: "500",
     fontSize: "1.5rem",
-    padding: "1.5rem"
+    padding: "2.5rem 1.5rem 1.5rem"
 }));
 
 export const StyledFrontPageText = styled(Typography)(() => ({
     color: "#FFF",
     fontWeight: "400",
     fontSize: "1.25rem",
-    padding: "6rem 1.5rem 1.5rem"
+    padding: "6rem 1.5rem 3rem"
 }));
 
 export const StyledSalaryHeader = styled(Typography)(() => ({
@@ -55,6 +55,7 @@ export const StyledTextField = styled(TextField)(() => ({
     borderRadius: "9px",
     width: "80%",
     backgroundColor: "#3A506B",
+    marginBottom: "1rem"
 }));
 
 export const StyledButton = styled(Button)(() => ({
@@ -77,6 +78,9 @@ export const StyledContainer = styled(Container)(() => ({
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     background: "url('background.svg') no-repeat",
+    ['@media (min-width:780px)']: { // eslint-disable-line no-useless-computed-key
+        background: "linear-gradient(180deg, #0B132B 0%, #3A506B 100%)",
+    },
     backgroundSize: "cover"
 }));
 
